@@ -7,7 +7,8 @@
 	<ui:composition template="/template.xhtml">
 		<ui:define name="pageHeader">#{msg['form.pageTitle']}</ui:define>
 		<ui:define name="body">
-			<h:form>
+			<h:outputScript library="js" name="shake.js"></h:outputScript>
+			<h:form id="item-form">
 				<div>
 					<h:outputLabel value="Product Name" />
 					<h:inputText id="productName" value="#{catalogItemFormBean.item.name}">

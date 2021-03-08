@@ -20,7 +20,7 @@ public class CatalogItemFormBean implements Serializable {
 		this.items.add(new CatalogItem(itemId, this.item.getName(), this.item.getManufacturer(),
 				this.item.getDescription(), this.item.getAvailableDate()));
 		
-		this.items.stream().forEach(item -> {
+		this.items.stream().forEach(item ->{
 			System.out.println(item.toString());
 		});
 		

@@ -61,5 +61,11 @@ public class CatalogItem {
 	public void setAvailableDate(LocalDate availableDate) {
 		this.availableDate = availableDate;
 	}
+	
+	@Override
+	public String toString() {
+		return "CatalogItem [itemId=" + itemId + ", name=" + name + ", manufacturer=" + manufacturer + ", description="
+				+ description + ", availableDate=" + availableDate + "]";
+	}
 
 }

@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
       
    		<f:loadBundle basename="si.goranferbisek.jsf.resources.messages" var="msg" />
-		<head>
+		<h:head>
 		<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
 		<style type="text/css">
 			body {
@@ -24,7 +24,9 @@
 				  color: #8E969D;
 			}
 		</style>
-		</head>
+		
+			<h:outputStylesheet library="css" name="global.css"></h:outputStylesheet>
+		</h:head>
 
 <body bgcolor="#ffffff">
 <table style="border:1px solid #CAD6E0"  align="center" cellpadding="0" cellspacing="0" border="0" width="400">
@@ -43,6 +45,9 @@
 		<td width="100%"  colspan="2">
 			<table width="100%" style="height:150px" align="left" cellpadding="0" cellspacing="0" border="0">
 			<tbody>
+				<tr>
+					<td><h:graphicImage library="img" value="/resources/img/banner.jpeg"/></td>
+				</tr>
 				<tr>
 					<td align="center" width="100%" valign="middle">
 					
