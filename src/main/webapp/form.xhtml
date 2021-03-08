@@ -10,9 +10,26 @@
 			<h:form>
 				<div>
 					<h:outputLabel value="Product Name" />
-					<h:inputText value="#{catalogItemFormBean.name}"/>
+					<h:inputText id="productName" value="#{catalogItemFormBean.item.name}">
+						<f:validateRegex pattern="[A-Za-z0-9 ]+"></f:validateRegex>
+					</h:inputText>
+					<h:message for="productName" />
+				</div>				
+				<div>
+					<h:outputLabel value="Manufacturer" />
+					<h:inputText value="#{catalogItemFormBean.item.manufacturer}"></h:inputText>
 				</div>
-				<h:commandButton action="list" value="Submit" />
+				<div>
+					<h:outputLabel value="Available Date" />
+					<h:inputText value="#{catalogItemFormBean.item.availableDate}">
+						<f:convertDateTime type="localDate" pattern="dd-MM-yyyy"/>
+					</h:inputText>
+				</div>
+				<div>
+					<h:outputLabel value="Description" />
+					<h:inputTextarea value="#{catalogItemFormBean.item.description}"></h:inputTextarea>
+				</div>
+				<h:commandButton action="#{catalogItemFormBean.addItem()}" value="Submit" />
 			</h:form>
 		</ui:define>
 	</ui:composition>

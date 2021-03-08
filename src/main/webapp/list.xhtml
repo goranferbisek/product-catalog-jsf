@@ -7,7 +7,7 @@
 	<ui:composition template="/template.xhtml">
 		<ui:define name="pageHeader">#{msg['list.pageTitle']}</ui:define>
 		<ui:define name="body">
-			<h:outputLabel value="#{catalogItemFormBean.name}"></h:outputLabel>
+			<h:outputLabel value="#{catalogItemFormBean.item.name}"></h:outputLabel>
 		</ui:define>
 	</ui:composition>
 </html>
