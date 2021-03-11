@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class LocalInventoryService implements InventoryService {
 
 	private Map<Long, InventoryItem> items = new HashMap<>();
