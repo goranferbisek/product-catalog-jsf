@@ -4,27 +4,37 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+
+import si.goranferbisek.CatalogItem;
+import si.goranferbisek.CatalogLocal;
 
 @SessionScoped
 @Named
 public class CatalogItemFormBean implements Serializable {
 	
+	@EJB
+	private CatalogLocal catalogBean;
 	private CatalogItem item = new CatalogItem();
 	private List<CatalogItem> items = new ArrayList<>();
 	
 	public String addItem() {
-		long itemId = this.items.size() + 1;
+		long itemId = this.catalogBean.getItems().size() + 1;
 		
-		this.items.add(new CatalogItem(itemId, this.item.getName(), this.item.getManufacturer(),
+		this.catalogBean.addItem(new CatalogItem(itemId, this.item.getName(), this.item.getManufacturer(),
 				this.item.getDescription(), this.item.getAvailableDate()));
 		
-		this.items.stream().forEach(item ->{
+		this.catalogBean.getItems().stream().forEach(item ->{
 			System.out.println(item.toString());
 		});
 		
 		return "list?faces-redirect=true";
+	}
+	
+	public void init() {
+		this.items = this.catalogBean.getItems();
 	}
 	
 	public CatalogItem getItem() {
