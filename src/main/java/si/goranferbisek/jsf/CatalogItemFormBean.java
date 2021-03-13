@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,6 +19,7 @@ public class CatalogItemFormBean implements Serializable {
 	private CatalogLocal catalogBean;
 
 	@Inject
+	@Named("remoteInventoryService")
 	private InventoryService inventoryService;
 	
 	private CatalogItem item = new CatalogItem();
