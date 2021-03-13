@@ -25,9 +25,9 @@ public class CatalogItemFormBean implements Serializable {
 	private List<CatalogItem> items = new ArrayList<>();
 	
 	public String addItem() {
-		long itemId = this.catalogBean.getItems().size() + 1;
+//		long itemId = this.catalogBean.getItems().size() + 1;
 		
-		this.catalogBean.addItem(new CatalogItem(itemId, this.item.getName(), this.item.getManufacturer(),
+		this.catalogBean.addItem(new CatalogItem(this.item.getName(), this.item.getManufacturer(),
 				this.item.getDescription(), this.item.getAvailableDate()));
 		
 		this.inventoryService.createItem(this.item.getItemId(), this.item.getName());
