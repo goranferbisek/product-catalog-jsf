@@ -4,14 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import si.goranferbisek.CatalogItem;
 import si.goranferbisek.CatalogLocal;
 
-@SessionScoped
+@RequestScoped
 @Named
 public class CatalogItemFormBean implements Serializable {
 	
@@ -23,6 +23,11 @@ public class CatalogItemFormBean implements Serializable {
 	
 	private CatalogItem item = new CatalogItem();
 	private List<CatalogItem> items = new ArrayList<>();
+	private String searchText;
+	
+	public void searchByName() {
+		this.items = this.catalogBean.searchByName(this.searchText);
+	}
 	
 	public String addItem() {
 //		long itemId = this.catalogBean.getItems().size() + 1;
@@ -50,6 +55,14 @@ public class CatalogItemFormBean implements Serializable {
 	}
 	public void setItems(List<CatalogItem> items) {
 		this.items = items;
+	}
+
+	public String getSearchText() {
+		return searchText;
+	}
+
+	public void setSearchText(String searchText) {
+		this.searchText = searchText;
 	}
 
 }
