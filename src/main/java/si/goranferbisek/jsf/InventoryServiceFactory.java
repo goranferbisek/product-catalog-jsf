@@ -6,7 +6,6 @@ import javax.enterprise.inject.Produces;
 
 public class InventoryServiceFactory {
 
-	@Produces
 	public InventoryService createInstance() {
 		InventoryService inventoryService = null;
 		
