@@ -19,7 +19,7 @@ public class CatalogItemFormBean implements Serializable {
 	private CatalogLocal catalogBean;
 
 	@Inject
-	@Named("remoteInventoryService")
+	@RemoteService
 	private InventoryService inventoryService;
 	
 	private CatalogItem item = new CatalogItem();

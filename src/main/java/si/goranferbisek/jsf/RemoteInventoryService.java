@@ -5,10 +5,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
 
 @ApplicationScoped
-@Named("remoteInventoryService")
+@RemoteService
 public class RemoteInventoryService implements InventoryService {
 
 private Map<Long, InventoryItem> items = new HashMap<>();
