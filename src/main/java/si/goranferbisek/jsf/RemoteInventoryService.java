@@ -1,32 +1,29 @@
 package si.goranferbisek.jsf;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Random;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Alternative;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.Response;
 
 @ApplicationScoped
 @RemoteService
-@Alternative
 public class RemoteInventoryService implements InventoryService {
-
-private Map<Long, InventoryItem> items = new HashMap<>();
+	
+	private String apiUrl = "http://localhost:8080/product-catalog-jax/catalog/api/";
 	
 	@Override
 	public void createItem(Long catalogItemId, String name) {
-		long inventoryItemId = items.size() + 1;
-		this.items.put(inventoryItemId, new InventoryItem(inventoryItemId, catalogItemId, name, 0L));
-		this.printInventory();
-	}
-
-	private void printInventory() {
-		System.out.println("Remote inventory contains: ");
+		Client client = ClientBuilder.newClient();
+		Response response = client.target(apiUrl)
+			.path("inventoryitems")
+			.request()
+			.post(Entity.json(new InventoryItem(null, catalogItemId, name, (long) new Random().nextInt(10))));
 		
-		for (Entry<Long, InventoryItem> entry: this.items.entrySet()) {
-			System.out.println(entry.getValue().getName());
-		}
+		System.out.println(response.getStatus());
+		System.out.println(response.getLocation().getPath());
 	}
 
 	@Override

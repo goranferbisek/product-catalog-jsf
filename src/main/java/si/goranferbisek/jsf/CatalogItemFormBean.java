@@ -19,6 +19,7 @@ public class CatalogItemFormBean implements Serializable {
 	private CatalogLocal catalogBean;
 
 	@Inject
+	@RemoteService
 	private InventoryService inventoryService;
 	
 	private CatalogItem item = new CatalogItem();
@@ -30,10 +31,7 @@ public class CatalogItemFormBean implements Serializable {
 	}
 	
 	public String addItem() {
-//		long itemId = this.catalogBean.getItems().size() + 1;
-		
-		this.catalogBean.addItem(new CatalogItem(this.item.getName(), this.item.getManufacturer(),
-				this.item.getDescription(), this.item.getAvailableDate()));
+		this.catalogBean.addItem(this.item);
 		
 		this.inventoryService.createItem(this.item.getItemId(), this.item.getName());
 		
