@@ -30,7 +30,8 @@ public class RemoteInventoryService implements InventoryService {
 	public long getQuantity(Long catalogItemId) {
 		Client client = ClientBuilder.newClient();
 		InventoryItem item = client.target(apiUrl).path("inventoryitems").path("catalog")
-				.queryParam("catalogItemId", catalogItemId.toString())
+				.path("{catalogItemId}")
+				.resolveTemplate("catalogItemId", catalogItemId.toString())
 				.request()
 				.get(InventoryItem.class);
 
