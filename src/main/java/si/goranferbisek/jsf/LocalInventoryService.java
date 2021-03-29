@@ -3,6 +3,7 @@ package si.goranferbisek.jsf;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.Future;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Alternative;
@@ -32,6 +33,12 @@ public class LocalInventoryService implements InventoryService {
 	@Override
 	public long getQuantity(Long catalogItemId) {
 		return 0L;
+	}
+
+	@Override
+	public Future<InventoryItem> asyncGetQuantity(Long catalogItemId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

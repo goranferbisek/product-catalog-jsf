@@ -1,6 +1,8 @@
 package si.goranferbisek.jsf;
 
 import java.io.Serializable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -35,9 +37,14 @@ public class CatalogItemDetailBean implements Serializable {
 	
 	private ItemManager manager = new ItemManager();
 
-	public void fetchItem() {
+	public void fetchItem() throws InterruptedException, ExecutionException {
 		this.item = this.catalogBean.findItem(this.itemId);
-		this.quantity = this.inventoryService.getQuantity(this.itemId);
+		
+		Future<InventoryItem> future = this.inventoryService.asyncGetQuantity(this.itemId);
+		System.out.println("Doing other work");
+		
+		this.quantity = future.get().getQuantity();
+		System.out.println("Completed request");
 	}
 	
 	public void addManager() {
