@@ -1,6 +1,7 @@
 package si.goranferbisek.jsf;
 
 import java.io.Serializable;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -40,11 +41,18 @@ public class CatalogItemDetailBean implements Serializable {
 	public void fetchItem() throws InterruptedException, ExecutionException {
 		this.item = this.catalogBean.findItem(this.itemId);
 		
-		Future<InventoryItem> future = this.inventoryService.asyncGetQuantity(this.itemId);
-		System.out.println("Doing other work");
+		CountDownLatch latch = new CountDownLatch(1);
 		
-		this.quantity = future.get().getQuantity();
+		this.inventoryService.reactiveGetQuantity(this.itemId)
+			.thenApply(item -> item.getQuantity())
+			.thenAccept(quantity -> {
+				this.setQuantity(quantity);
+				System.out.println(this.getQuantity());
+				latch.countDown();
+			});
+		
 		System.out.println("Completed request");
+		latch.await();
 	}
 	
 	public void addManager() {

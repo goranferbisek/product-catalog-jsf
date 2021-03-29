@@ -1,6 +1,7 @@
 package si.goranferbisek.jsf;
 
 import java.io.Serializable;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Future;
 
 public interface InventoryService extends Serializable {
@@ -10,5 +11,7 @@ public interface InventoryService extends Serializable {
 	public long getQuantity(Long catalogItemId);
 	
 	public Future<InventoryItem> asyncGetQuantity(Long catalogItemId);
+	
+	public CompletionStage<InventoryItem> reactiveGetQuantity(Long catalogItemId);
 
 }

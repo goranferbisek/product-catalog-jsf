@@ -1,6 +1,7 @@
 package si.goranferbisek.jsf;
 
 import java.util.Random;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Future;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -14,6 +15,18 @@ import javax.ws.rs.core.Response;
 public class RemoteInventoryService implements InventoryService {
 	
 	private String apiUrl = "http://localhost:8080/product-catalog-jax/catalog/api/";
+	
+	@Override
+	public CompletionStage<InventoryItem> reactiveGetQuantity(Long catalogItemId) {
+		Client client = ClientBuilder.newClient();
+		
+		return client.target(apiUrl).path("inventoryitems").path("catalog")
+				.path("{catalogItemId}")
+				.resolveTemplate("catalogItemId", catalogItemId.toString())
+				.request()
+				.rx()
+				.get(InventoryItem.class);
+	}
 	
 	@Override
 	public Future<InventoryItem> asyncGetQuantity(Long catalogItemId) {
